@@ -184,7 +184,7 @@
   },
   "devDependencies": {
     "@types/hast": "^3.0.4",
-    "@types/node": "^25.0.10",
+    "@types/node": "^26.4.0",
     "esbuild": "^0.28.1",
     "prettier": "^3.8.1",
     "tsup": "^8.5.0",
