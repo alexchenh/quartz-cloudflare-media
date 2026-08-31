@@ -2,6 +2,20 @@
 
 Production-ready R2 and Cloudflare Images delivery for Quartz 5. Your Obsidian vault and Git repository stay the source of truth; production builds upload only referenced media, rewrite generated HTML to immutable Cloudflare URLs, and remove redundant copies from the site artifact.
 
+## Why this exists
+
+Quartz is excellent at publishing a text-first knowledge base, but media-heavy pages create a different scaling problem. A photo essay, race report, travel log, or event page can contain dozens of large, high-quality images—and a single page can make the local build artifact and every deployment carry all of those bytes. Visitors may also receive a full-size original when the browser only needs a smaller, responsive variant.
+
+This plugin keeps the authoring experience unchanged while separating content from media delivery:
+
+- Keep images and videos beside your Markdown files in Obsidian.
+- Upload each referenced file once using a content-addressed, immutable key instead of copying it into every build.
+- Let Cloudflare Images serve the right width and format for each responsive image request.
+- Keep originals private behind the Worker in the default setup, while preserving range requests for video.
+- Rewrite only generated HTML; authored Markdown links and Obsidian references remain readable and portable.
+
+It is most useful when a Quartz site serves many large images on the same page, needs responsive delivery without maintaining an image pipeline, or wants to keep Pages deploys small and repeatable. For a small site with only a few lightweight assets, Quartz's normal local asset handling may be simpler.
+
 ## Quick start
 
 From an existing Quartz 5 site:
