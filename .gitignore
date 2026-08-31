@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.quartz-cache/
+.env*
+.dev.vars*
+worker/node_modules/
+worker/.wrangler/
+*.tgz
+.DS_Store

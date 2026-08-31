@@ -1,0 +1,20 @@
+{
+  "name": "quartz-cloudflare-media-worker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "npm run types:check && tsc --noEmit && npm test",
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "types": "wrangler types",
+    "types:check": "wrangler types --check",
+    "test": "UPLOAD_TOKEN=test-token vitest run"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.22.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.0",
+    "wrangler": "^4.118.0"
+  }
+}

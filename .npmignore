@@ -1,0 +1,10 @@
+node_modules/
+worker/node_modules/
+worker/.wrangler/
+worker/test/
+worker/vitest.config.ts
+test/
+src/
+.github/
+docs/
+*.tgz

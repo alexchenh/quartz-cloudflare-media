@@ -1,0 +1,21 @@
+name: Bug report
+description: Report a reproducible plugin, CLI, or Worker problem
+body:
+  - type: textarea
+    attributes:
+      label: What happened?
+      description: Include the command and sanitized output. Never include secrets.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Versions
+      description: Package, Quartz, Node, and Wrangler versions
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Backend
+      options: [worker, direct-r2]
+    validations:
+      required: true

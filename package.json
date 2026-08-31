@@ -1,0 +1,194 @@
+{
+  "name": "@alexchenh/quartz-cloudflare-media",
+  "version": "1.0.0",
+  "description": "Production-ready Cloudflare R2 and Images delivery for Quartz 5",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alex Chen",
+  "homepage": "https://github.com/alexchenh/quartz-cloudflare-media#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexchenh/quartz-cloudflare-media.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexchenh/quartz-cloudflare-media/issues"
+  },
+  "keywords": [
+    "quartz",
+    "quartz-plugin",
+    "cloudflare",
+    "r2",
+    "images",
+    "obsidian"
+  ],
+  "files": [
+    "dist",
+    "worker/package.json",
+    "worker/package-lock.json",
+    "worker/src",
+    "worker/tsconfig.json",
+    "worker/wrangler.jsonc",
+    "worker/worker-configuration.d.ts",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "quartz-cloudflare-media": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "check": "npm run typecheck && npm run format:check && npm test && npm run worker:check",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "test": "node --import tsx --test test/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "worker:check": "npm --prefix worker run check",
+    "prepack": "npm run build"
+  },
+  "engines": {
+    "node": ">=22",
+    "npm": ">=10.9.0"
+  },
+  "quartz": {
+    "name": "cloudflare-media",
+    "displayName": "Cloudflare Media",
+    "description": "Serve published Quartz media from Cloudflare R2 and Images",
+    "category": "transformer",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [
+      "@quartz-community/crawl-links"
+    ],
+    "defaultOrder": 65,
+    "defaultEnabled": true,
+    "defaultOptions": {
+      "backend": "worker",
+      "contentDirectory": "content",
+      "outputDirectory": "public",
+      "cacheDirectory": ".quartz-cache",
+      "excludeDrafts": true,
+      "imageWidths": [
+        640,
+        1280,
+        1920
+      ],
+      "defaultImageWidth": 1280,
+      "imageQuality": 88
+    },
+    "configSchema": {
+      "type": "object",
+      "required": [
+        "backend",
+        "publicOrigin"
+      ],
+      "properties": {
+        "backend": {
+          "type": "string",
+          "enum": [
+            "worker",
+            "direct-r2"
+          ]
+        },
+        "publicOrigin": {
+          "type": "string"
+        },
+        "imageTransformOrigin": {
+          "type": "string"
+        },
+        "bucketName": {
+          "type": "string"
+        },
+        "keyPrefix": {
+          "type": "string"
+        },
+        "contentDirectory": {
+          "type": "string"
+        },
+        "outputDirectory": {
+          "type": "string"
+        },
+        "cacheDirectory": {
+          "type": "string"
+        },
+        "manifestFilename": {
+          "type": "string"
+        },
+        "ignorePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeDrafts": {
+          "type": "boolean"
+        },
+        "imageWidths": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "defaultImageWidth": {
+          "type": "number"
+        },
+        "imageQuality": {
+          "type": "number"
+        },
+        "imageSizes": {
+          "type": "string"
+        },
+        "uploadConcurrency": {
+          "type": "number"
+        },
+        "multipartConcurrency": {
+          "type": "number"
+        },
+        "multipartPartSize": {
+          "type": "number"
+        },
+        "workerUploadTokenEnvironment": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "overrides": {
+    "esbuild": "^0.28.1"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1115.0",
+    "@aws-sdk/lib-storage": "^3.1115.0",
+    "@quartz-community/types": "^0.3.0",
+    "@quartz-community/utils": "^0.1.0",
+    "globby": "^16.1.0",
+    "github-slugger": "^2.0.0",
+    "sharp": "^0.35.3",
+    "unist-util-visit": "^5.0.0",
+    "wrangler": "^4.118.0",
+    "yaml": "^2.8.2"
+  },
+  "devDependencies": {
+    "@types/hast": "^3.0.4",
+    "@types/node": "^25.0.10",
+    "esbuild": "^0.28.1",
+    "prettier": "^3.8.1",
+    "tsup": "^8.5.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
