@@ -1,6 +1,6 @@
 # Quartz Cloudflare Media
 
-Production-ready R2 and Cloudflare Images delivery for Quartz 5. Your Obsidian vault and Git repository stay the source of truth; production builds upload only referenced media, rewrite generated HTML to immutable Cloudflare URLs, and remove redundant copies from the site artifact.
+Production-ready R2 and Cloudflare Images delivery for [Quartz 5](https://github.com/jackyzha0/quartz). Your Obsidian vault and Git repository stay the source of truth; production builds upload only referenced media, rewrite generated HTML to immutable Cloudflare URLs, and remove redundant copies from the site artifact.
 
 ## Why this exists
 
